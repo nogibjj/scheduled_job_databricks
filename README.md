@@ -1,37 +1,43 @@
-[![CI](https://github.com/nogibjj/python-ruff-template/actions/workflows/cicd.yml/badge.svg)](https://github.com/nogibjj/python-ruff-template/actions/workflows/cicd.yml)
-## Template for Python projects with RUFF linter
+# Creating and Running Databricks Jobs
 
-![1 15_rust_built_python_tools](https://github.com/nogibjj/python-ruff-template/assets/58792/db5f7bda-a977-4c67-acbe-a70fe034fbdf)
+## Overview
 
+In this lab, you will learn how to create and run Databricks jobs using the Jobs UI, CLI, and Jobs API. You will schedule jobs to run on a defined cadence using both the UI and API.
 
+## Lab Steps
 
-1. First thing to do on launch is to open a new shell and verify virtualenv is sourced.
+1. Create a job using the Jobs UI
+   - Click "Jobs" in the left sidebar and select "Create Job"
+   - Give the job a name and description
+   - Add a notebook task, selecting a notebook from your workspace
+   - Specify a new or existing cluster to run the task
+   - Click "Create" to save the job
+   
+2. Run the job immediately using the UI
+   - From the job page, click the "Runs" tab
+   - Click "Run Now" to start a job run
+   
+3. Schedule the job using the UI
+   - From the job page, click on the job name to open the configuration panel
+   - Click "Add Schedule"
+   - Select a cadence for the schedule, like hourly or daily
+   - Click "Create" to save the schedule
+   
+4. Use the CLI to run the job
+   - Run "databricks jobs run-now --job-id <job-id>" to start a run
+   - The job-id can be found in the URL of the job page in the UI
+   
+5. Use the API to get the job ID
+   - Make a GET request to "/jobs/list" to list all jobs
+   - Find your job and note the "job_id" field
+   
+6. Use the API to schedule the job
+   - Make a POST request to "/jobs/create" 
+   - Set the "job_id" field to the job id you want to schedule
+   - Specify the schedule using cron syntax in the "schedule" field
+   - This will create a schedule for the existing job
 
-Things included are:
-
-* `Makefile`
-
-* `Pytest`
-
-* `pandas`
-
-* `Ruff`:  
-
-Run `make lint` which runs `ruff check`.  You can find out more info on [Ruff here](https://github.com/astral-sh/ruff).
-
-* `Dockerfile`
-
-* `GitHub copilot`
-
-* `jupyter` and `ipython` 
-
-* A base set of libraries for devops and web
-
-* `githubactions`
-
-## References
-
-![1 1-function-essence-of-programming](https://github.com/nogibjj/python-ruff-template/assets/58792/f7f33cd3-cff5-4014-98ea-09b6a29c7557)
-
-
-
+7. Use the UI to monitor job runs
+   - Go to the "Runs" tab of the job page
+   - View the status and details of each run
+   - Check that scheduled runs are triggering automatically
